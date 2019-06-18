@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WhoTweet - {{ title }}</title>
+    <!-- This is a comment in html-->
+  </head>
+
+  <body>
+    <h1>WhoTweet</h1>
+    <p>Content for WhoTweet will go here...</p>
+    <ul>
+      {% for user in users %}
+      <li>{{ user.name }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
