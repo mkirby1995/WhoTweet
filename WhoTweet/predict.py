@@ -1,7 +1,7 @@
 """Prediction of user based on tweet embeddings"""
 import numpy as np
 from sklearn.linear_model import LogisticRegression
-from .models import User
+from .models import Bird
 from .twitter import BASILICA
 
 def perdict_user(user1_name, user2_name, tweet_text):

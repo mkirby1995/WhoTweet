@@ -1,6 +1,7 @@
 from decouple import config
 from flask import Flask, render_template, request
-from .models import DB, User
+from .models import DB, Bird
+from .twitter import add_or_update_bird
 
 
 def create_app():
@@ -13,28 +14,22 @@ def create_app():
 
     @app.route('/')
     def root():
-        users = User.query.all()
-        return render_template('base.html', title = 'Home', users = users)
+        birds = Bird.query.all()
+        return render_template('base.html', title = 'Home', birds = birds)
 
-    @app.route('/user', methods=['POST'])
-    @app.route('/user/<name>', methods = ['GET'])
-    def user(name = None, message = ''):
-        name = name or request.values['user_name']
+    @app.route('/bird', methods=['POST'])
+    @app.route('/bird/<name>', methods = ['GET'])
+    def bird(name = None, message = ''):
+        name = name or request.values['bird_name']
         try:
             if request.method == 'POST':
-                add_or_update_user(name)
-                message = "User {} successfully added!".format(name)
-            tweets = User.query.filter(User.name == name).one().tweets
+                add_or_update_bird(name)
+                message = "Bird {} successfully added!".format(name)
+            tweets = Bird.query.filter(Bird.name == name).one().tweets
         except Exception as e:
             message = "Error adding {}: {}".format(name, e)
+            tweets = []
         return render_template('user.html', title = name, tweets = tweets,
                                message = message)
-
-    """@app.route('/reset')
-    def reset():
-        DB.drop_all()
-        DB.create_all()
-        return render_template('base.html', title = 'DB Reset!', users = [])
-        """
 
     return app
