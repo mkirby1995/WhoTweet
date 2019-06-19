@@ -15,7 +15,7 @@ TWITTER = tweepy.API(TWITTER_AUTH)
 
 BASILICA = basilica.Connection(config('BASILICA_KEY'))
 
-users = ['austen']
+users = ['gvanrossum', 'NYTScience']
 
 def add_or_update_user(username):
     """Add or update a user and their tweets"""
