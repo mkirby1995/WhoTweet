@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>TweetTweet!</title>
-</head>
-<body>
-    <h1>{{ title }}</h1>
-    <ul>
-        {% for tweet in tweets %}
-        <li>{{ tweet.text }}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content%}
+  <div id="user-info">
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+  </div>
+  <div id="user-tweets">
+    {% for tweet in tweets %}
+    <span class="stack">{{ tweet.text }}</span>
+    {% endfor %}
+  </div>
+{% endblock %}

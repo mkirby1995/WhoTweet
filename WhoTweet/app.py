@@ -26,12 +26,15 @@ def create_app():
                 message = "User {} successfully added!".format(name)
             tweets = User.query.filter(User.name == name).one().tweets
         except Exception as e:
-            pass
+            message = "Error adding {}: {}".format(name, e)
+        return render_template('user.html', title = name, tweets = tweets,
+                               message = message)
 
-    @app.route('/reset')
+    """@app.route('/reset')
     def reset():
         DB.drop_all()
         DB.create_all()
         return render_template('base.html', title = 'DB Reset!', users = [])
+        """
 
     return app

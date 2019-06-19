@@ -12,6 +12,8 @@ basilica = "*"
 tweepy = "*"
 python-decouple = "*"
 python-dotenv = "*"
+sklearn = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.6"
