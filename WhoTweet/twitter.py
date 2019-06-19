@@ -18,18 +18,17 @@ BASILICA = basilica.Connection(config('BASILICA_KEY'))
 users = ['gvanrossum', 'NYTScience']
 
 def add_or_update_user(username):
-    """Add or update a user and their tweets"""
-
+    """
+    Add or update a user and their tweets
+    """
     twitter_user = TWITTER.get_user(username)
-    db_user = (User.query.get(id) or
-               User(id=id, name=username))
+    db_user = (User.query.get(id) or User(id=id, name=username))
     DB.session.add(db_user)
 
     tweets = twitter_user.timeline(count=200, exclude_replies = True,
         include_rts = False, tweet_mode = 'extended')
     for tweet in tweets:
-        embedding = BASILICA.embed_sentence(tweet.full_text,
-            model = 'twitter')
+        embedding = BASILICA.embed_sentence(tweet.full_text, model = 'twitter')
         db_tweet = Tweet(id = tweet.id, text = tweet.full_text[:300],
             embedding = embedding)
         db_user.tweets.append(db_tweet)

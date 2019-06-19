@@ -12,6 +12,9 @@
       {% for user in users %}
       <li>{{ user.name }}</li>
       {% endfor %}
+      {% for tweet in tweets %}
+      <li>{{ Tweet.text }}</li>
+      {% endfor %}
     </ul>
   </body>
 </html>
