@@ -2,6 +2,7 @@ from decouple import config
 from flask import Flask, render_template, request
 from .models import DB, Bird
 from .twitter import add_or_update_bird
+from .predict import predict_user
 
 
 def create_app():
@@ -30,6 +31,18 @@ def create_app():
             message = "Error adding {}: {}".format(name, e)
             tweets = []
         return render_template('user.html', title = name, tweets = tweets,
+                               message = message)
+
+    @app.route('/predict', methods=['POST'])
+    def predict():
+        user1, user2, = sorted([user1 = request.values['user1']
+                                user2 = request.values['user2']])
+        prediction =  predict_user(user1, user2, request.values['tweet_text'])
+        message = '"{}" is more likely to be said by {} than {}'.format(
+            request.values['tweet_text'], user1 if prediction else user2,
+            user2 if prediction else user1)
+        )
+        return render_template('prediction.html', title='Prediction',
                                message = message)
 
     return app

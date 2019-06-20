@@ -4,7 +4,7 @@ from sklearn.linear_model import LogisticRegression
 from .models import Bird
 from .twitter import BASILICA
 
-def perdict_user(user1_name, user2_name, tweet_text):
+def predict_user(user1_name, user2_name, tweet_text):
     user1 = User.query.filter(User.name == user1_name).one()
     user2 = User.query.filter(User.name == user2_name).one()
     user1_embeddings = np.array([tweet.embeddings for tweet in user1.tweets])
