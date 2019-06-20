@@ -36,12 +36,21 @@ def create_app():
     @app.route('/predict', methods=['POST'])
     def predict():
         user1, user2 = sorted([user1 = request.values['user1'],
-                                user2 = request.values['user2']])
+                               user2 = request.values['user2']])
         prediction =  predict_user(user1, user2, request.values['tweet_text'])
         message = '"{}" is more likely to be said by {} than {}'.format(
             request.values['tweet_text'], user1 if prediction else user2,
             user2 if prediction else user1)
         return render_template('prediction.html', title='Prediction',
                                message = message)
+
+    @app.route('/reset')
+    def reset():
+        #CACHE.flushall()
+        #CACHED_COMPARISONS.clear()
+        DB.drop_all()
+        DB.create_all()
+        add_users()
+        return render_template('base.html', title='Reset database!')
 
     return app
