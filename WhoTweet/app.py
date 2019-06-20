@@ -35,7 +35,7 @@ def create_app():
 
     @app.route('/predict', methods=['POST'])
     def predict():
-        user1, user2, = sorted([user1 = request.values['user1'],
+        user1, user2 = sorted([user1 = request.values['user1'],
                                 user2 = request.values['user2']])
         prediction =  predict_user(user1, user2, request.values['tweet_text'])
         message = '"{}" is more likely to be said by {} than {}'.format(
