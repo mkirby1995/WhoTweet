@@ -34,7 +34,7 @@ def create_app():
                                message = message)
 
     @app.route('/predict', methods=['POST'])
-    def predict():
+    def predict(message = ''):
         user1, user2 = sorted([user1 = request.values['user1'],
                                user2 = request.values['user2']])
         prediction =  predict_user(user1, user2, request.values['tweet_text'])
