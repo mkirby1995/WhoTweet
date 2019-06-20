@@ -1,6 +1,4 @@
 """SQL Alchmey models for WhoTweet"""
-#FLASK_APP=WhoTweet:APP flask run
-
 from flask_sqlalchemy import SQLAlchemy
 
 DB = SQLAlchemy()

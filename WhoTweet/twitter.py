@@ -40,3 +40,13 @@ def add_or_update_bird(username):
         db_user.tweets.append(db_tweet)
         DB.session.add(db_tweet)
     DB.session.commit()
+
+TWITTER_USERS = ['robert_zubrin', 'JoeBiden', 'ewarren', 'realDonaldTrump', 'BetoORouke']
+
+def add_users(users=TWITTER_USERS):
+    """
+    Add/update a list of users (strings of user names).
+    May take awhile, so run "offline" (flask shell).
+    """
+    for user in users:
+        add_or_update_bird(user)

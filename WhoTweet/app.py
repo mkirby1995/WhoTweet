@@ -1,7 +1,7 @@
 from decouple import config
 from flask import Flask, render_template, request
 from .models import DB, Bird
-from .twitter import add_or_update_bird
+from .twitter import add_or_update_bird, add_users
 from .predict import predict_user
 import os
 
@@ -50,11 +50,13 @@ def create_app():
 
     @app.route('/reset')
     def reset():
+        TWITTER_USERS = ['robert_zubrin', 'JoeBiden', 'ewarren',
+                         'realDonaldTrump', 'BetoORouke']
         #CACHE.flushall()
         #CACHED_COMPARISONS.clear()
         DB.drop_all()
         DB.create_all()
-        add_users()
+        add_users(users = TWITTER_USERS)
         return render_template('base.html', title='Reset database!')
 
     return app
