@@ -18,7 +18,7 @@ def create_app():
         birds = Bird.query.all()
         return render_template('base.html', title = 'Home', birds = birds)
 
-    @app.route('/bird', methods=['POST'])
+    @app.route('/bird', methods = ['POST'])
     @app.route('/bird/<name>', methods = ['GET'])
     def bird(name = None, message = ''):
         name = name or request.values['bird_name']
@@ -33,8 +33,8 @@ def create_app():
         return render_template('user.html', title = name, tweets = tweets,
                                message = message)
 
-    @app.route('/compare', methods=['POST'])
-    def compare(message=''):
+    @app.route('/compare', methods = ['POST'])
+    def compare(message = ''):
         user1, user2 = sorted([user1 = request.values['user1'],
                                user2 = request.values['user2']])
         prediction =  predict_user(user1, user2, request.values['tweet_text'])
