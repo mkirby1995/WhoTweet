@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 from .models import DB, Bird
 from .twitter import add_or_update_bird
 from .predict import predict_user
+import os
 
 
 def create_app():
